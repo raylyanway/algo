@@ -104,6 +104,30 @@ class LinkedList {
     this.head = previousNode;
   }
 
+  getKthFromTheEnd(position) {
+    if (this.isEmpty() || position < 0 || !position || position > this.size)
+      return;
+    const positionOfSecondNode = position - 1;
+    let firstNode = this.head;
+    let secondNode = null;
+    let currentNode = this.head;
+    let index = 0;
+    while (currentNode !== null) {
+      if (index === positionOfSecondNode) {
+        secondNode = currentNode;
+      }
+      if (index > positionOfSecondNode) {
+        firstNode = firstNode.next;
+        secondNode = secondNode.next;
+      }
+      if (secondNode === this.tail) {
+        return firstNode.value;
+      }
+      currentNode = currentNode.next;
+      index++;
+    }
+  }
+
   isEmpty() {
     return this.head === null;
   }
@@ -114,9 +138,9 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-// list.addLast(1);
+list.addLast(1);
 list.addLast(2);
-// list.addLast(3);
+list.addLast(3);
 list.addFirst(4);
 // console.log(list.contains(0));
 // console.log(list.contains(3));
@@ -126,7 +150,8 @@ list.addFirst(4);
 // list.removeFirst();
 // list.removeLast();
 // console.log(list.getSize());
-console.log(list.convertToArray());
-list.reverse();
-console.log(list.convertToArray());
+// console.log(list.convertToArray());
+// list.reverse();
+// console.log(list.convertToArray());
 // console.log(list.print());
+console.log(list.getKthFromTheEnd(1));
